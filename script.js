@@ -32,28 +32,69 @@ form.addEventListener("submit", function (event) {
   const team = teamSelect.value;
   const teamName = teamSelect.selectedOptions[0].text;
 
-  // Increment
-  count++;
+  // Only increment and update if goal not reached
+  if (count < maxCount) {
+    count++;
 
-  // Update progress bar
-  const percentage = Math.round((count / maxCount) * 100);
+    // Update progress bar
+    const percentage = Math.round((count / maxCount) * 100);
+    updateProgressBar(percentage);
 
-  //Attendance bar progress
-  updateProgressBar(percentage);
+    // Update attendee count display
+    const attendeeCount = document.getElementById("attendeeCount");
+    if (attendeeCount) {
+      attendeeCount.textContent = count;
+    }
 
-  // Update attendee count display
-  const attendeeCount = document.getElementById("attendeeCount");
-  if (attendeeCount) {
-    attendeeCount.textContent = count;
+    // Update team counter
+    const teamCounter = document.getElementById(team + "Count");
+    teamCounter.textContent = parseInt(teamCounter.textContent) + 1;
+
+    //Greeting card for each team member after check-in
+    greetingCard(name, team, teamName);
+
+    // Reset form
+    form.reset();
   }
 
-  // Update team counter
-  const teamCounter = document.getElementById(team + "Count");
-  teamCounter.textContent = parseInt(teamCounter.textContent) + 1;
+  // Show celebration message and stop counting
+  if (count == maxCount) {
+    const waterCount = document.getElementById("waterCount").textContent;
+    const zeroCount = document.getElementById("zeroCount").textContent;
+    const powerCount = document.getElementById("powerCount").textContent;
 
-  //Greeting card for each team member after check-in
-  greetingCard(name, team, teamName);
+    let teamName = "";
 
-  // Reset form
-  form.reset();
+    if (
+      parseInt(waterCount) > parseInt(zeroCount) &&
+      parseInt(waterCount) > parseInt(powerCount)
+    ) {
+      teamName = "Team Water Rise";
+    } else if (
+      parseInt(zeroCount) > parseInt(waterCount) &&
+      parseInt(zeroCount) > parseInt(powerCount)
+    ) {
+      teamName = "Team Net Zero";
+    } else if (
+      parseInt(powerCount) > parseInt(waterCount) &&
+      parseInt(powerCount) > parseInt(zeroCount)
+    ) {
+      teamName = "Team Renewables";
+    }
+
+    const winnerCeleb = document.getElementById("greeting");
+    if (winnerCeleb) {
+      winnerCeleb.textContent = `🎉Congratulations to ${teamName} for winning the attendance challenge!`;
+      winnerCeleb.style.display = "block";
+
+      if (teamName == "Team Water Rise")
+        winnerCeleb.style.backgroundColor = "#e8f7fc";
+      else if (teamName == "Team Net Zero")
+        winnerCeleb.style.backgroundColor = "#ecfdf3";
+      else if (teamName == "Team Renewables")
+        winnerCeleb.style.backgroundColor = "#fff7ed";
+    }
+    // Optionally reset form or disable it
+    form.reset();
+  }
 });
