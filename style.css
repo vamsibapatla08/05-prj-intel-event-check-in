@@ -3,19 +3,13 @@
   margin-bottom: 18px;
   padding: 15px;
   border-radius: 12px;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 500;
   color: #475569;
-  background: linear-gradient(
-    90deg,
-    #e8f7fc 33%,
-    #ecfdf3 33%,
-    #ecfdf3 66%,
-    #fff7ed 66%
-  );
   box-shadow: 0 2px 8px rgba(0, 60, 116, 0.06);
   text-align: center;
 }
+
 /* Smooth transition for progress bar width */
 #progressBar {
   transition: width 0.5s ease;
