@@ -43,9 +43,22 @@ form.addEventListener("submit", function (event) {
   const teamCounter = document.getElementById(team + "Count");
   teamCounter.textContent = parseInt(teamCounter.textContent) + 1;
 
-  //Welcome message
-  const message = `🎉 Welcome, ${name} from ${teamName}!`;
-  console.log(message);
+  // Show greeting message
+  const greetingDiv = document.getElementById("greeting");
+  if (greetingDiv) {
+    greetingDiv.textContent = `🎉 Welcome, ${name} from ${teamName}!`;
+    greetingDiv.style.display = "block";
+    // Set background color based on team
+    if (team === "water") {
+      greetingDiv.style.background = "#e8f7fc";
+    } else if (team === "zero") {
+      greetingDiv.style.background = "#ecfdf3";
+    } else if (team === "power") {
+      greetingDiv.style.background = "#fff7ed";
+    } else {
+      greetingDiv.style.background = "#f3f4f6";
+    }
+  }
 
   //Reset form
   form.reset();
