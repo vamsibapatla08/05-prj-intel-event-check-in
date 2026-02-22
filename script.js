@@ -20,18 +20,14 @@ form.addEventListener("submit", function (event) {
 
   const name = nameInput.value.trim();
   const team = teamSelect.value;
-  const teamName = teamSelect.selectedOptions[0].text; // Get the text of the selected option
+  const teamName = teamSelect.selectedOptions[0].text;
 
-  console.log(name, teamName);
-
-  //Increment
+  // Increment
   count++;
-  console.log("Total check-ins: " + count);
 
   // Update progress bar
   const percentage = Math.round((count / maxCount) * 100);
   updateProgressBar(percentage);
-  console.log(`Progress: ${percentage}%`);
 
   // Update attendee count display
   const attendeeCount = document.getElementById("attendeeCount");
@@ -39,7 +35,7 @@ form.addEventListener("submit", function (event) {
     attendeeCount.textContent = count;
   }
 
-  //Update team counter
+  // Update team counter
   const teamCounter = document.getElementById(team + "Count");
   teamCounter.textContent = parseInt(teamCounter.textContent) + 1;
 
@@ -60,6 +56,56 @@ form.addEventListener("submit", function (event) {
     }
   }
 
-  //Reset form
+  // If attendance goal is reached, show celebration and highlight winning team
+  if (count >= maxCount) {
+    // Find team counts
+    const water = parseInt(document.getElementById("waterCount").textContent);
+    const zero = parseInt(document.getElementById("zeroCount").textContent);
+    const power = parseInt(document.getElementById("powerCount").textContent);
+
+    let winner = "water";
+    let winnerName = "Team Water Wise";
+    let max = water;
+
+    if (zero > max) {
+      winner = "zero";
+      winnerName = "Team Net Zero";
+      max = zero;
+    }
+
+    if (power > max) {
+      winner = "power";
+      winnerName = "Team Renewables";
+      max = power;
+    }
+
+    // Show celebration message
+    if (greetingDiv) {
+      greetingDiv.textContent = `🏆 Attendance goal reached! Congratulations, ${winnerName}!`;
+      greetingDiv.style.display = "block";
+      
+      if (winner === "water") {
+        greetingDiv.style.background = "#e8f7fc";
+      } else if (winner === "zero") {
+        greetingDiv.style.background = "#ecfdf3";
+      } else if (winner === "power") {
+        greetingDiv.style.background = "#fff7ed";
+      }
+    }
+
+    // Highlight winning team card
+    document.querySelectorAll(".team-card").forEach(function (card) {
+      card.style.outline = "none";
+      card.style.boxShadow = "none";
+    });
+
+    const winnerCard = document.querySelector(`.team-card.${winner}`);
+    if (winnerCard) {
+      winnerCard.style.outline = "3px solid gold";
+      winnerCard.style.boxShadow = "0 0 18px 2px gold";
+    }
+  }
+
+  // Reset form
   form.reset();
 });
