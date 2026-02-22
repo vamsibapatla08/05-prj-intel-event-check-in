@@ -1,3 +1,11 @@
+// Update the progress bar width smoothly
+function updateProgressBar(percentage) {
+  const progressBar = document.getElementById("progressBar");
+  if (progressBar) {
+    progressBar.style.width = `${percentage}%`;
+  }
+}
+
 const form = document.getElementById("checkInForm"); //Get's one specific element from the page by its ID and stores it in a variable called form
 const nameInput = document.getElementById("attendeeName"); //Get's one specific element from the page by its ID and stores it in a variable called nameInput
 const teamSelect = document.getElementById("teamSelect"); //Get's one specific element from the page by its ID and stores it in a variable called teamSelect
@@ -20,9 +28,16 @@ form.addEventListener("submit", function (event) {
   count++;
   console.log("Total check-ins: " + count);
 
-  //Update progress bar
-  const percentage = Math.round((count / maxCount) * 100) + "%";
-  console.log(`Progress: ${percentage}`);
+  // Update progress bar
+  const percentage = Math.round((count / maxCount) * 100);
+  updateProgressBar(percentage);
+  console.log(`Progress: ${percentage}%`);
+
+  // Update attendee count display
+  const attendeeCount = document.getElementById("attendeeCount");
+  if (attendeeCount) {
+    attendeeCount.textContent = count;
+  }
 
   //Update team counter
   const teamCounter = document.getElementById(team + "Count");
