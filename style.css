@@ -10,6 +10,25 @@
   text-align: center;
 }
 
+#attendeeList{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  column-count: 2;
+  column-gap: 20px;
+  padding-top: 20px;
+  padding-left: 0;
+}
+
+.attendeeListHeading{
+  font-size: 15px;
+  padding: 5px;
+  margin-top: 20px;
+  font-family: "Ubuntu", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: black;
+  align-content: center;
+}
+
 /* Smooth transition for progress bar width */
 #progressBar {
   transition: width 0.5s ease;
