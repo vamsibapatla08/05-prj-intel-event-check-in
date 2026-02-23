@@ -23,9 +23,11 @@ function greetingCard(name, team, teamName) {
 
     if (team == "water") {
       card.style.backgroundColor = "#e8f7fc";
-    } else if (team == "zero") {
+    } 
+    else if (team == "zero") {
       card.style.backgroundColor = "#ecfdf3";
-    } else if (team == "power") {
+    } 
+    else if (team == "power") {
       card.style.backgroundColor = "#fff7ed";
     }
   }
@@ -92,12 +94,14 @@ form.addEventListener("submit", function (event) {
       parseInt(waterCount) > parseInt(powerCount)
     ) {
       teamName = "Team Water Rise";
-    } else if (
+    } 
+    else if (
       parseInt(zeroCount) > parseInt(waterCount) &&
       parseInt(zeroCount) > parseInt(powerCount)
     ) {
       teamName = "Team Net Zero";
-    } else if (
+    } 
+    else if (
       parseInt(powerCount) > parseInt(waterCount) &&
       parseInt(powerCount) > parseInt(zeroCount)
     ) {
@@ -106,7 +110,7 @@ form.addEventListener("submit", function (event) {
 
     const winnerCeleb = document.getElementById("greeting");
     if (winnerCeleb) {
-      winnerCeleb.textContent = `🎉Congratulations to ${teamName} for winning the attendance challenge!`;
+      winnerCeleb.innerHTML = `🎉Congratulations to ${teamName} for winning the attendance challenge!`;
       winnerCeleb.style.display = "block";
 
       if (teamName == "Team Water Rise"){
