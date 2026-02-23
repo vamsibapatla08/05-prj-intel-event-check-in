@@ -59,6 +59,17 @@ form.addEventListener("submit", function (event) {
     //Greeting card for each team member after check-in
     greetingCard(name, team, teamName);
 
+    //Attendee list
+    const attendeeList = document.getElementById("attendeeList");
+    const listItem = document.createElement("li");
+    listItem.innerHTML = `${count}) <u>${name}</u> from <u>${teamName}</u>`;
+    listItem.style.fontFamily = "Roboto, sans-serif";
+    listItem.style.fontSize = "16px";
+    listItem.style.padding = "5px";
+    listItem.style.listStyleType = "none"; //To make those bullet points disappear
+    listItem.style.fontWeight = "700"; //To make the text a little bolder
+    attendeeList.appendChild(listItem); //This adds each attendee
+
     // Reset form
     form.reset();
   }
@@ -100,8 +111,8 @@ form.addEventListener("submit", function (event) {
       else if (teamName == "Team Renewables")
         winnerCeleb.style.backgroundColor = "#fff7ed";
     }
+
     // Optionally reset form or disable it
     form.reset();
   }
-
 });
