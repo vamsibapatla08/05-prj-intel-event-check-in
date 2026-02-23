@@ -5,7 +5,9 @@ const teamSelect = document.getElementById("teamSelect"); //Get's one specific e
 function updateProgressBar(percentage) {
   const prgBar = document.getElementById("progressBar");
 
-  if (prgBar) prgBar.style.width = percentage + "%";
+  if (prgBar) {
+    prgBar.style.width = percentage + "%";
+  }
 
   console.log(`Progress: ${percentage}%`); // Log the progress percentage to the console for debugging
 }
@@ -19,9 +21,13 @@ function greetingCard(name, team, teamName) {
 
     console.log(card.textContent);
 
-    if (team == "water") card.style.backgroundColor = "#e8f7fc";
-    else if (team == "zero") card.style.backgroundColor = "#ecfdf3";
-    else if (team == "power") card.style.backgroundColor = "#fff7ed";
+    if (team == "water") {
+      card.style.backgroundColor = "#e8f7fc";
+    } else if (team == "zero") {
+      card.style.backgroundColor = "#ecfdf3";
+    } else if (team == "power") {
+      card.style.backgroundColor = "#fff7ed";
+    }
   }
 }
 
@@ -62,12 +68,11 @@ form.addEventListener("submit", function (event) {
     //Attendee list
     const attendeeList = document.getElementById("attendeeList");
     const listItem = document.createElement("li");
-    listItem.innerHTML = `${count}) <u>${name}</u> from <u>${teamName}</u>`;
+    listItem.innerHTML = `${count}) <b>${name}</b> from <b>${teamName}</b>`;
     listItem.style.fontFamily = "Roboto, sans-serif";
     listItem.style.fontSize = "16px";
     listItem.style.padding = "5px";
     listItem.style.listStyleType = "none"; //To make those bullet points disappear
-    listItem.style.fontWeight = "700"; //To make the text a little bolder
     attendeeList.appendChild(listItem); //This adds each attendee
 
     // Reset form
@@ -104,12 +109,15 @@ form.addEventListener("submit", function (event) {
       winnerCeleb.textContent = `🎉Congratulations to ${teamName} for winning the attendance challenge!`;
       winnerCeleb.style.display = "block";
 
-      if (teamName == "Team Water Rise")
+      if (teamName == "Team Water Rise"){
         winnerCeleb.style.backgroundColor = "#e8f7fc";
-      else if (teamName == "Team Net Zero")
+      }
+      else if (teamName == "Team Net Zero"){
         winnerCeleb.style.backgroundColor = "#ecfdf3";
-      else if (teamName == "Team Renewables")
+      }
+      else if (teamName == "Team Renewables"){
         winnerCeleb.style.backgroundColor = "#fff7ed";
+      }
     }
 
     // Optionally reset form or disable it
