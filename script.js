@@ -68,7 +68,7 @@ form.addEventListener("submit", function (event) {
     //Attendee list
     const attendeeList = document.getElementById("attendeeList");
     const listItem = document.createElement("li");
-    listItem.innerHTML = `${count}) <b>${name}</b> from <b>${teamName}</b>`;
+    listItem.innerHTML = `<span class="attendee-number">${count}</span>) <b>${name}</b> from <b>${teamName}</b>`;
     listItem.style.fontFamily = "Roboto, sans-serif";
     listItem.style.fontSize = "16px";
     listItem.style.padding = "5px";
