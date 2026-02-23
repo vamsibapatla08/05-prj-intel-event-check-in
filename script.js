@@ -5,6 +5,7 @@ const teamSelect = document.getElementById("teamSelect"); //Get's one specific e
 function updateProgressBar(percentage) {
   const prgBar = document.getElementById("progressBar");
   if (prgBar) prgBar.style.width = percentage + "%";
+  console.log(`Progress: ${percentage}%`); // Log the progress percentage to the console for debugging
 }
 
 function greetingCard(name, team, teamName) {
@@ -13,6 +14,8 @@ function greetingCard(name, team, teamName) {
   if (card) {
     card.style.display = "block";
     card.textContent = `🎉Welcome, ${name} from ${teamName}!`;
+
+    console.log(`🎉Welcome, ${name} from ${teamName}`); // Log the greeting card update to the console for debugging
 
     if (team == "water") card.style.backgroundColor = "#e8f7fc";
     else if (team == "zero") card.style.backgroundColor = "#ecfdf3";
@@ -36,6 +39,7 @@ form.addEventListener("submit", function (event) {
   if (count < maxCount) {
     count++;
 
+    console.log(`Total count: ${count}`);
     // Update progress bar
     const percentage = Math.round((count / maxCount) * 100);
     updateProgressBar(percentage);
@@ -97,4 +101,5 @@ form.addEventListener("submit", function (event) {
     // Optionally reset form or disable it
     form.reset();
   }
+
 });
