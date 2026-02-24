@@ -32,9 +32,9 @@
 }
 
 .attendeeListHeading {
-  font-size: 15px;
+  font-size: 17px;
   padding: 5px;
-  margin-top: 20px;
+  margin-top: 50px;
   font-family: "Ubuntu", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   color: black;
   align-content: center;
@@ -44,6 +44,7 @@
 #progressBar {
   transition: width 0.5s ease;
 }
+
 /* Modern reset */
 * {
   margin: 0;

@@ -35,39 +35,6 @@ function greetingCard(name, team, teamName) {
 let count = 0;
 const maxCount = 50;
 
-// Restore counts and attendee list from localStorage (for localStorage)
-window.addEventListener("DOMContentLoaded", function () {
-  // Restore attendance count
-  const savedCount = localStorage.getItem("attendanceCount");
-
-  if (savedCount) {
-    count = parseInt(savedCount);
-    
-    const attendeeCount = document.getElementById("attendeeCount");
-    if (attendeeCount) {
-      attendeeCount.textContent = count;
-    }
-    const percentage = Math.round((count / maxCount) * 100);
-    updateProgressBar(percentage);
-  }
-
-  // Restore team counts
-  ["water", "zero", "power"].forEach(function (team) {
-    const savedTeamCount = localStorage.getItem(team + "Count");
-    const teamCounter = document.getElementById(team + "Count");
-    if (savedTeamCount && teamCounter) {
-      teamCounter.textContent = savedTeamCount;
-    }
-  });
-
-  // Restore attendee list
-  const savedAttendees = localStorage.getItem("attendeeList");
-  const attendeeList = document.getElementById("attendeeList");
-  if (savedAttendees && attendeeList) {
-    attendeeList.innerHTML = savedAttendees;
-  }
-});
-
 // Handle form submission
 
 form.addEventListener("submit", function (event) {
@@ -82,6 +49,7 @@ form.addEventListener("submit", function (event) {
     count++;
 
     console.log(`Total count: ${count}`);
+    
     // Update progress bar
     const percentage = Math.round((count / maxCount) * 100);
     updateProgressBar(percentage); //function application
@@ -92,13 +60,9 @@ form.addEventListener("submit", function (event) {
       attendeeCount.textContent = count;
     }
 
-    localStorage.setItem("attendanceCount", count); //localStorage
-
     // Update team counter
     const teamCounter = document.getElementById(team + "Count");
     teamCounter.textContent = parseInt(teamCounter.textContent) + 1;
-
-    localStorage.setItem(team + "Count", teamCounter.textContent); //localStorage
 
     //Greeting card for each team member after check-in
     greetingCard(name, team, teamName);
@@ -115,9 +79,6 @@ form.addEventListener("submit", function (event) {
     listItem.style.alignContent = "left";
     listItem.style.breakInside = "avoid"; //To prevent list items from breaking across columns
     attendeeList.appendChild(listItem); //This adds each attendee
-
-    // Save attendee list HTML
-    localStorage.setItem("attendeeList", attendeeList.innerHTML); //localStorage
 
     // Reset form
     form.reset();
