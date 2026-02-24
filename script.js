@@ -110,7 +110,7 @@ form.addEventListener("submit", function (event) {
 
     const winnerCeleb = document.getElementById("greeting");
     if (winnerCeleb) {
-      winnerCeleb.innerHTML = `🎉Congratulations to ${teamName} for winning the attendance challenge!`;
+      winnerCeleb.innerHTML = `🎉Congratulations to ${teamName} for winning attendance with maximum check-in's!`;
       winnerCeleb.style.display = "block";
 
       if (teamName == "Team Water Rise") {
