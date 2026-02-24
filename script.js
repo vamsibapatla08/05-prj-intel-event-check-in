@@ -23,10 +23,13 @@ function greetingCard(name, team, teamName) {
 
     if (team == "water") {
       card.style.backgroundColor = "#e8f7fc";
+      card.textContent += '💧'; // Add water droplet emoji for Team Water Rise
     } else if (team == "zero") {
       card.style.backgroundColor = "#ecfdf3";
+      card.textContent += '🌿'; // Add leaf emoji for Team Net Zero
     } else if (team == "power") {
       card.style.backgroundColor = "#fff7ed";
+      card.textContent += '⚡'; // Add lightning bolt emoji for Team Renewables
     }
   }
 }
