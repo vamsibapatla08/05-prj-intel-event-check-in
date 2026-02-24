@@ -36,6 +36,7 @@ let count = 0;
 const maxCount = 50;
 
 // Handle form submission
+
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
@@ -67,8 +68,9 @@ form.addEventListener("submit", function (event) {
 
     //Attendee list
     const attendeeList = document.getElementById("attendeeList");
+    const attendeeNumber = count;
     const listItem = document.createElement("li");
-    listItem.innerHTML = `<span class="attendee-number">${count}</span>) <b>${name}</b> from <b>${teamName}</b>`;
+    listItem.innerHTML = `<span class="attendee-number">${attendeeNumber}</span>) <b>${name}</b> from <b>${teamName}</b>`;
     listItem.style.fontFamily = "Roboto, sans-serif";
     listItem.style.fontSize = "16px";
     listItem.style.padding = "5px";
