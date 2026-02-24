@@ -6,7 +6,7 @@ function updateProgressBar(percentage) {
   const prgBar = document.getElementById("progressBar");
 
   if (prgBar) {
-    prgBar.style.width = percentage + "%";
+    prgBar.style.width = percentage + "%"; //Increases width of the progress bar based on the percentage calculated from the attendance count
   }
 
   console.log(`Progress: ${percentage}%`); // Log the progress percentage to the console for debugging
@@ -35,6 +35,39 @@ function greetingCard(name, team, teamName) {
 let count = 0;
 const maxCount = 50;
 
+// Restore counts and attendee list from localStorage (for localStorage)
+window.addEventListener("DOMContentLoaded", function () {
+  // Restore attendance count
+  const savedCount = localStorage.getItem("attendanceCount");
+
+  if (savedCount) {
+    count = parseInt(savedCount);
+    
+    const attendeeCount = document.getElementById("attendeeCount");
+    if (attendeeCount) {
+      attendeeCount.textContent = count;
+    }
+    const percentage = Math.round((count / maxCount) * 100);
+    updateProgressBar(percentage);
+  }
+
+  // Restore team counts
+  ["water", "zero", "power"].forEach(function (team) {
+    const savedTeamCount = localStorage.getItem(team + "Count");
+    const teamCounter = document.getElementById(team + "Count");
+    if (savedTeamCount && teamCounter) {
+      teamCounter.textContent = savedTeamCount;
+    }
+  });
+
+  // Restore attendee list
+  const savedAttendees = localStorage.getItem("attendeeList");
+  const attendeeList = document.getElementById("attendeeList");
+  if (savedAttendees && attendeeList) {
+    attendeeList.innerHTML = savedAttendees;
+  }
+});
+
 // Handle form submission
 
 form.addEventListener("submit", function (event) {
@@ -51,7 +84,7 @@ form.addEventListener("submit", function (event) {
     console.log(`Total count: ${count}`);
     // Update progress bar
     const percentage = Math.round((count / maxCount) * 100);
-    updateProgressBar(percentage);
+    updateProgressBar(percentage); //function application
 
     // Update attendee count display
     const attendeeCount = document.getElementById("attendeeCount");
@@ -59,9 +92,13 @@ form.addEventListener("submit", function (event) {
       attendeeCount.textContent = count;
     }
 
+    localStorage.setItem("attendanceCount", count); //localStorage
+
     // Update team counter
     const teamCounter = document.getElementById(team + "Count");
     teamCounter.textContent = parseInt(teamCounter.textContent) + 1;
+
+    localStorage.setItem(team + "Count", teamCounter.textContent); //localStorage
 
     //Greeting card for each team member after check-in
     greetingCard(name, team, teamName);
@@ -73,11 +110,14 @@ form.addEventListener("submit", function (event) {
     listItem.innerHTML = `<span class="attendee-number">${attendeeNumber}</span>) <b>${name}</b> from <b>${teamName}</b>`;
     listItem.style.fontFamily = "Roboto, sans-serif";
     listItem.style.fontSize = "16px";
-    listItem.style.padding = "5px";
-    listItem.style.listStyleType = "none"; //To make those bullet points disappear
+    listItem.style.padding = "5px"; 
+    listItem.style.listStyleType = "none"; //To remove the bullet points for each attendee added in the list
     listItem.style.alignContent = "left";
     listItem.style.breakInside = "avoid"; //To prevent list items from breaking across columns
     attendeeList.appendChild(listItem); //This adds each attendee
+
+    // Save attendee list HTML
+    localStorage.setItem("attendeeList", attendeeList.innerHTML); //localStorage
 
     // Reset form
     form.reset();
@@ -108,17 +148,18 @@ form.addEventListener("submit", function (event) {
       teamName = "Team Renewables";
     }
 
-    const winnerCeleb = document.getElementById("greeting");
-    if (winnerCeleb) {
-      winnerCeleb.innerHTML = `🎉Congratulations to ${teamName} for winning attendance with maximum check-in's!`;
-      winnerCeleb.style.display = "block";
+    const winnerCelebration = document.getElementById("greeting");
+
+    if (winnerCelebration) {
+      winnerCelebration.innerHTML = `🎉Congratulations to ${teamName} for winning attendance goal with maximum check-in's!`;
+      winnerCelebration.style.display = "block";
 
       if (teamName == "Team Water Rise") {
-        winnerCeleb.style.backgroundColor = "#e8f7fc";
+        winnerCelebration.style.backgroundColor = "#e8f7fc"; //light blue
       } else if (teamName == "Team Net Zero") {
-        winnerCeleb.style.backgroundColor = "#ecfdf3";
+        winnerCelebration.style.backgroundColor = "#ecfdf3"; //light green
       } else if (teamName == "Team Renewables") {
-        winnerCeleb.style.backgroundColor = "#fff7ed";
+        winnerCelebration.style.backgroundColor = "#fff7ed"; //light orange
       }
     }
 
